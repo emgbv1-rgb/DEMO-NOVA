@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#16222f">
 <title>Demo NOVA personalizada — EcoNova</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,8 +28,8 @@ body{font-family:'Montserrat',Arial,sans-serif;color:#fff;overflow:hidden;backgr
 .box h1{font-size:24px;font-weight:900;margin-top:8px;letter-spacing:-.4px}
 .box p{font-size:12px;color:#c8d2dd;margin-top:8px;line-height:1.5}
 .box label{display:block;font-size:10px;font-weight:800;letter-spacing:1.5px;color:var(--dim);margin:18px 0 6px}
-.box input,.box select{width:100%;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.22);
- background:rgba(255,255,255,.08);color:#fff;font-family:'Montserrat';font-size:14px;font-weight:600;outline:none}
+.box input,.box select{width:100%;padding:13px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.22);
+ background:rgba(255,255,255,.08);color:#fff;font-family:'Montserrat';font-size:16px;font-weight:600;outline:none;-webkit-appearance:none;appearance:none}
 .box select option{color:#223249}
 .box button{width:100%;margin-top:22px;padding:14px;border:none;border-radius:40px;cursor:pointer;
  background:var(--greenl);color:#0e2a1e;font-family:'Montserrat';font-weight:900;font-size:14px;letter-spacing:.5px}
@@ -92,7 +93,9 @@ body{font-family:'Montserrat',Arial,sans-serif;color:#fff;overflow:hidden;backgr
 .ph-av{width:32px;height:32px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px}
 .ph-nm{font-size:12.5px;font-weight:700}
 .ph-st{font-size:9px;color:var(--greenl)}
-.chat{padding:12px 4px 2px;display:flex;flex-direction:column;gap:9px;min-height:330px}
+.chat{padding:12px 4px 2px;display:flex;flex-direction:column;gap:9px;min-height:300px;
+ max-height:min(360px,46svh);overflow-y:auto;scrollbar-width:none}
+.chat::-webkit-scrollbar{display:none}
 .bub{max-width:88%;padding:9px 12px;border-radius:12px;font-size:11.5px;line-height:1.45;font-weight:500;
  opacity:0;transform:translateY(8px);transition:all .35s}
 .bub.show{opacity:1;transform:none}
@@ -114,6 +117,34 @@ body{font-family:'Montserrat',Arial,sans-serif;color:#fff;overflow:hidden;backgr
 #replay{position:fixed;bottom:16px;left:20px;width:36px;height:36px;border-radius:50%;border:none;
  background:rgba(255,255,255,.1);color:#fff;font-size:15px;cursor:pointer;opacity:.35;z-index:40}
 #replay:hover{opacity:.9}
+
+/* ---------- móvil ---------- */
+@media(max-width:740px){
+ body{overflow-y:auto;height:auto}
+ .brand{top:14px;left:14px;gap:8px}
+ .brand img{height:26px}
+ .brand span{font-size:8px;letter-spacing:2px}
+ #setup{position:relative;min-height:100svh;padding:76px 14px 40px}
+ .box{padding:24px 20px 22px}
+ .box h1{font-size:20px}
+ #demo{position:relative;inset:auto;min-height:100svh;justify-content:flex-start;
+  padding:72px 14px 90px}
+ .dhead{margin-bottom:16px}
+ .dhead h2{font-size:22px}
+ .stage{flex-direction:column;gap:20px;width:100%}
+ .phone{order:-1;width:100%;max-width:370px}
+ .chat{min-height:260px;max-height:52svh}
+ .panel{width:100%;max-width:410px;padding:16px 14px}
+ .kpi .kv{font-size:15px}
+ .brow{gap:12px}
+ .donutbox{width:84px;flex-basis:84px}
+ .donutbox svg{width:84px;height:84px}
+ .cta{margin-top:20px;padding:0 6px}
+ .cta a{font-size:12px;padding:11px 20px}
+ .note{position:static;display:block;text-align:center;margin:26px auto 70px;font-size:8.5px}
+ #replay{bottom:14px;left:14px}
+ #editbtn{bottom:14px;left:60px;opacity:.55}
+}
 #editbtn{position:fixed;bottom:16px;left:64px;height:36px;border:none;border-radius:20px;padding:0 14px;
  background:rgba(255,255,255,.1);color:#c8d2dd;font-family:'Montserrat';font-size:10.5px;font-weight:700;
  cursor:pointer;opacity:.35;z-index:40}
@@ -200,6 +231,7 @@ function startDemo(emp,giro){
   clearTimers();
   var g=GIROS[giro]||GIROS.comercializadora;
   document.getElementById('setup').style.display='none';
+  window.scrollTo(0,0);
   var d=document.getElementById('demo');d.style.display='flex';
   document.getElementById('d-title').innerHTML='Pregúntale a <b>NOVA</b>'+(emp?' — '+emp:'');
   document.getElementById('d-ph').textContent='NOVA · '+(emp||'tu empresa');
